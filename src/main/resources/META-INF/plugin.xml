@@ -1,0 +1,85 @@
+<idea-plugin>
+    <id>com.jakubjirak.archbreadcrumbs</id>
+    <name>Architecture Breadcrumbs</name>
+    <vendor email="jakub@jirak.dev" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
+
+    <description><![CDATA[
+    <h2>Architecture Breadcrumbs</h2>
+    <p>Leave "breadcrumb" annotations in your code that explain architectural decisions, rationale, and context.
+    Breadcrumbs appear as gutter icons and in a dedicated tool window, creating a navigation layer for architecture
+    documentation embedded directly in the codebase.</p>
+
+    <h3>Features</h3>
+    <ul>
+        <li><b>Breadcrumb annotations</b> — mark lines with architectural context (decisions, patterns, constraints)</li>
+        <li><b>Gutter icons</b> — visual indicators on annotated lines</li>
+        <li><b>Tool window</b> — browse all breadcrumbs with filtering and search</li>
+        <li><b>Navigation</b> — jump between linked breadcrumbs</li>
+        <li><b>VCS-friendly</b> — breadcrumbs stored in <code>.arch-breadcrumbs.json</code>, committed with code</li>
+        <li><b>Categories</b> — Decision, Pattern, Constraint, TODO, Warning, Context</li>
+    </ul>
+
+    <h3>Freemium</h3>
+    <p>Free: up to 20 breadcrumbs. Paid: unlimited breadcrumbs, cross-linking, export.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Settings page -->
+        <applicationConfigurable
+                id="com.jakubjirak.archbreadcrumbs.settings"
+                parentId="tools"
+                displayName="Architecture Breadcrumbs"
+                instance="com.jakubjirak.archbreadcrumbs.settings.BreadcrumbsConfigurable"/>
+
+        <!-- Persistent settings -->
+        <applicationService
+                serviceImplementation="com.jakubjirak.archbreadcrumbs.settings.BreadcrumbsSettings"/>
+
+        <!-- Breadcrumb store (project-level) -->
+        <projectService
+                serviceImplementation="com.jakubjirak.archbreadcrumbs.store.BreadcrumbStore"/>
+
+        <!-- Gutter line marker -->
+        <codeInsight.lineMarkerProvider
+                language=""
+                implementationClass="com.jakubjirak.archbreadcrumbs.gutter.BreadcrumbLineMarkerProvider"/>
+
+        <!-- Tool window -->
+        <toolWindow
+                id="Architecture Breadcrumbs"
+                anchor="bottom"
+                factoryClass="com.jakubjirak.archbreadcrumbs.ui.BreadcrumbsToolWindowFactory"
+                icon="AllIcons.Nodes.Module"/>
+
+        <!-- Notification group -->
+        <notificationGroup
+                id="Architecture Breadcrumbs"
+                displayType="BALLOON"
+                toolWindowId="Architecture Breadcrumbs"/>
+
+        <!-- Startup activity -->
+        <postStartupActivity
+                implementation="com.jakubjirak.archbreadcrumbs.ArchBreadcrumbsStartupActivity"/>
+    </extensions>
+
+    <actions>
+        <action id="com.jakubjirak.archbreadcrumbs.AddBreadcrumbAction"
+                class="com.jakubjirak.archbreadcrumbs.actions.AddBreadcrumbAction"
+                text="Add Architecture Breadcrumb"
+                description="Add an architecture breadcrumb annotation at the current line"
+                icon="AllIcons.Actions.AddFile">
+            <keyboard-shortcut first-keystroke="control shift B" keymap="$default"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+
+        <action id="com.jakubjirak.archbreadcrumbs.NavigateBreadcrumbAction"
+                class="com.jakubjirak.archbreadcrumbs.actions.NavigateBreadcrumbAction"
+                text="Navigate Linked Breadcrumbs"
+                description="Navigate between linked architecture breadcrumbs"
+                icon="AllIcons.Actions.Forward">
+            <add-to-group group-id="GoToMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
