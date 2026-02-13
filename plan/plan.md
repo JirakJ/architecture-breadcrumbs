@@ -221,6 +221,44 @@
 - [ ] Marketplace listing
 - [ ] Git tag `v2026.2.1`
 
+## Fáze 13: Git Enhancement — Commit-Linked ADRs
+
+- [ ] Rozšíření `BreadcrumbParser` o `@arch:commit=<sha>` atribut
+  - [ ] Parsování commit SHA z breadcrumb syntaxe
+  - [ ] `CommitLinkedBreadcrumb` datový model
+- [ ] Auto-detection: git blame pro řádek s breadcrumb → commit metadata
+  - [ ] `GitAnnotationProvider` integrace pro blame data
+- [ ] Tooltip: commit message, autor, datum přidruženého commitu
+- [ ] Navigace: klik na commit SHA → VCS Log s filter na commit
+- [ ] Action „Link to Current Commit" — přidá `commit=` s HEAD SHA
+- [ ] ADR propojení: `@arch:link=ADR-NNN` → soubor v `docs/adr/`
+- [ ] Unit testy
+
+## Fáze 14: Git Enhancement — Blame-Aware Architecture Notes
+
+- [ ] `BlameAnnotatedBreadcrumb` datový model (author, date, stale detection)
+  - [ ] Git blame integrace přes `GitAnnotationProvider.annotate(file)`
+- [ ] Architecture Map tool window — nové sloupce „Author" a „Last Modified"
+  - [ ] Filtrování dle autora: „Show only my breadcrumbs"
+  - [ ] Timeline view: chronologický seznam dle commit date
+- [ ] Stale breadcrumb detection
+  - [ ] Porovnání blame date breadcrumb řádku vs. okolní kód (±10 řádků)
+  - [ ] Warning annotation + quick-fix: „Review breadcrumb", „Mark as reviewed"
+- [ ] Unit testy
+
+## Fáze 15: Git Enhancement — Branch Impact Analysis
+
+- [ ] `BranchArchitectureImpact` datový model (added/removed/modified breadcrumbs)
+  - [ ] `BreadcrumbDiff` pro modifikované breadcrumby
+- [ ] Action „Compare Architecture with Branch"
+  - [ ] Branch selector dialog (combo box)
+  - [ ] Diff: přidané, odebrané, modifikované breadcrumby
+  - [ ] Layer impact a pattern impact agregace
+- [ ] Architecture Review Checklist — auto-generovaný Markdown
+  - [ ] Copy-to-clipboard pro PR description
+- [ ] VCS Log integrace: highlight commitů měnících breadcrumby
+- [ ] Unit testy
+
 ---
 
 ## Budoucí fáze (Paid)
