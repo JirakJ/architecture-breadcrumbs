@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <rect width="40" height="40" rx="5" fill="#6A1B9A"/>
+  <!-- Breadcrumb trail -->
+  <rect x="4" y="16" width="8" height="8" rx="2" fill="#E0E0E0"/>
+  <polygon points="14,20 18,16 18,24" fill="#E0E0E0" opacity="0.7"/>
+  <rect x="19" y="16" width="8" height="8" rx="2" fill="#E0E0E0" opacity="0.85"/>
+  <polygon points="29,20 33,16 33,24" fill="#E0E0E0" opacity="0.55"/>
+  <rect x="34" y="17" width="4" height="6" rx="1.5" fill="#E0E0E0" opacity="0.5"/>
+  <!-- Architecture layers -->
+  <rect x="6" y="6" width="28" height="3" rx="1" fill="#BA68C8" opacity="0.6"/>
+  <rect x="6" y="31" width="28" height="3" rx="1" fill="#BA68C8" opacity="0.6"/>
+</svg>
