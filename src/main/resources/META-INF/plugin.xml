@@ -5,24 +5,34 @@
     <vendor email="jakub@jirak.dev" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
 
     <description><![CDATA[
-    <h2>Architecture Breadcrumbs</h2>
-    <p>Leave "breadcrumb" annotations in your code that explain architectural decisions, rationale, and context.
-    Breadcrumbs appear as gutter icons and in a dedicated tool window, creating a navigation layer for architecture
-    documentation embedded directly in the codebase.</p>
+<h2>Architecture Breadcrumbs</h2>
+<p>
+  Code tells you <i>what</i> — Architecture Breadcrumbs tells you <i>why</i>. Embed architectural context
+  directly in your codebase with rich annotations for decisions, patterns, constraints, and trade-offs that
+  every developer on your team can discover.
+</p>
 
-    <h3>Features</h3>
-    <ul>
-        <li><b>Breadcrumb annotations</b> — mark lines with architectural context (decisions, patterns, constraints)</li>
-        <li><b>Gutter icons</b> — visual indicators on annotated lines</li>
-        <li><b>Tool window</b> — browse all breadcrumbs with filtering and search</li>
-        <li><b>Navigation</b> — jump between linked breadcrumbs</li>
-        <li><b>VCS-friendly</b> — breadcrumbs stored in <code>.arch-breadcrumbs.json</code>, committed with code</li>
-        <li><b>Categories</b> — Decision, Pattern, Constraint, TODO, Warning, Context</li>
-    </ul>
+<h2>Key Features</h2>
+<ul>
+  <li><b>6 Breadcrumb Categories</b> — Decision, Pattern, Constraint, Trade-off, Assumption, Risk</li>
+  <li><b>Gutter Icons</b> — Visual markers in the editor for annotated code regions</li>
+  <li><b>Breadcrumb Explorer</b> — Dedicated tool window to browse all annotations by category or file</li>
+  <li><b>VCS-Friendly Storage</b> — Annotations stored in <code>.arch-breadcrumbs.json</code> for team sharing</li>
+  <li><b>Quick Navigation</b> — Jump between related architectural annotations across the project</li>
+</ul>
 
-    <h3>Freemium</h3>
-    <p>Free: up to 20 breadcrumbs. Paid: unlimited breadcrumbs, cross-linking, export.</p>
-    ]]></description>
+<h2>Why Architecture Breadcrumbs?</h2>
+<p>
+  Architectural knowledge degrades over time. Breadcrumbs preserve the reasoning behind design decisions
+  right where developers need it — in the code, not in a forgotten wiki page.
+</p>
+
+<h2>Free vs Pro</h2>
+<ul>
+  <li><b>Free:</b> Up to 20 breadcrumbs per project, all 6 categories, gutter icons, explorer</li>
+  <li><b>Pro:</b> Unlimited breadcrumbs, cross-linking between annotations, export to HTML/Markdown, architecture heatmap, and team templates</li>
+</ul>
+]]></description>
 
     <depends>com.intellij.modules.platform</depends>
     <depends optional="true" config-file="git4idea-extensions.xml">Git4Idea</depends>
