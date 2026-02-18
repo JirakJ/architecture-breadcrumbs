@@ -2,37 +2,128 @@
     <id>com.jakubjirak.archbreadcrumbs</id>
     <product-descriptor code="PARCHBREADCRMBS" release-date="20260215" release-version="20262" optional="true"/>
     <name>Architecture Breadcrumbs</name>
-    <vendor email="jakub@jirak.dev" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
+    <vendor email="support@jakubjirak.com" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
 
     <description><![CDATA[
-<h2>Architecture Breadcrumbs</h2>
+<h2>Stop Losing Architecture Decisions — Embed Them in Your Code</h2>
+
 <p>
-  Code tells you <i>what</i> — Architecture Breadcrumbs tells you <i>why</i>. Embed architectural context
-  directly in your codebase with rich annotations for decisions, patterns, constraints, and trade-offs that
-  every developer on your team can discover.
+  Architecture Breadcrumbs lets you embed architectural context directly in your codebase.
+  Annotate decisions, patterns, constraints, trade-offs, assumptions, and risks using
+  simple structured comments. Your reasoning stays with your code — versioned, searchable,
+  and visible to every developer on the team.
 </p>
 
-<h2>Key Features</h2>
-<ul>
-  <li><b>6 Breadcrumb Categories</b> — Decision, Pattern, Constraint, Trade-off, Assumption, Risk</li>
-  <li><b>Gutter Icons</b> — Visual markers in the editor for annotated code regions</li>
-  <li><b>Breadcrumb Explorer</b> — Dedicated tool window to browse all annotations by category or file</li>
-  <li><b>VCS-Friendly Storage</b> — Annotations stored in <code>.arch-breadcrumbs.json</code> for team sharing</li>
-  <li><b>Quick Navigation</b> — Jump between related architectural annotations across the project</li>
-</ul>
+<h3>Why Architecture Breadcrumbs?</h3>
 
-<h2>Why Architecture Breadcrumbs?</h2>
 <p>
-  Architectural knowledge degrades over time. Breadcrumbs preserve the reasoning behind design decisions
-  right where developers need it — in the code, not in a forgotten wiki page.
+  Architectural knowledge degrades over time. Critical decisions end up in forgotten wiki pages,
+  buried Slack threads, or the minds of people who have moved on. Architecture Breadcrumbs keeps
+  that knowledge where it belongs — right next to the code it describes.
 </p>
 
-<h2>Free vs Pro</h2>
+<h3>Breadcrumb Categories</h3>
+
 <ul>
-  <li><b>Free:</b> Up to 20 breadcrumbs per project, all 6 categories, gutter icons, explorer</li>
-  <li><b>Pro:</b> Unlimited breadcrumbs, cross-linking between annotations, export to HTML/Markdown, architecture heatmap, and team templates</li>
+  <li><strong>Decision</strong> — Why a specific approach was chosen</li>
+  <li><strong>Pattern</strong> — Which design patterns are in use and why</li>
+  <li><strong>Constraint</strong> — Hard limits from business, regulations, or infrastructure</li>
+  <li><strong>Trade-off</strong> — What was sacrificed and what was gained</li>
+  <li><strong>Assumption</strong> — Hidden assumptions that should stay visible</li>
+  <li><strong>Risk</strong> — Known risks flagged for ongoing awareness</li>
 </ul>
-]]></description>
+
+<h3>Annotations</h3>
+
+<p>Add breadcrumbs using structured comment annotations:</p>
+
+<pre><code>// @arch:pattern=Repository @arch:reason=Decouples domain from persistence
+// @arch:layer=infrastructure @arch:link=ADR-042</code></pre>
+
+<p>
+  Annotations are plain comments in your source files. They work with your existing
+  version control workflow — no external files or sync tools required.
+</p>
+
+<h3>IDE Integration</h3>
+
+<ul>
+  <li>Syntax highlighting with colored backgrounds for each category</li>
+  <li>Inlay hints showing breadcrumb details inline</li>
+  <li>Gutter icons for quick identification</li>
+  <li>Navigation between related breadcrumbs</li>
+  <li>Breadcrumbs Tool Window — browse by category or file</li>
+  <li>VCS-friendly storage via <code>.arch-breadcrumbs.json</code></li>
+</ul>
+
+<h3>Pro Features</h3>
+
+<ul>
+  <li>Unlimited breadcrumbs and layers</li>
+  <li>Architecture Map — visualize breadcrumbs across layers and modules</li>
+  <li>Auto-detection of common patterns and layer assignments</li>
+  <li>Layer consistency checks</li>
+  <li>Export to Mermaid and PlantUML diagrams</li>
+  <li>Cross-linking between breadcrumbs</li>
+</ul>
+
+<h3>Team Features</h3>
+
+<ul>
+  <li>Team dashboard with breadcrumb coverage and trends</li>
+  <li>Team consistency checks across repositories</li>
+</ul>
+
+<h3>Pricing</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tier</th>
+      <th>Price</th>
+      <th>Highlights</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Free</td>
+      <td>$0</td>
+      <td>All 6 categories, up to 20 breadcrumbs, 3 custom layers, gutter icons, explorer</td>
+    </tr>
+    <tr>
+      <td>Pro</td>
+      <td>$2.90/mo or $29/yr</td>
+      <td>Unlimited breadcrumbs/layers, Architecture Map, auto-detection, export, cross-linking</td>
+    </tr>
+    <tr>
+      <td>Team</td>
+      <td>$5.90/user/mo</td>
+      <td>All Pro features + team dashboard + team consistency checks</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Supported Languages</h3>
+
+<p>Java, Kotlin, Python, JavaScript/TypeScript, Go</p>
+
+<h3>Requirements</h3>
+
+<ul>
+  <li>IntelliJ IDEA 2024.3+ (build 243+)</li>
+  <li>Java 21+</li>
+  <li>Optional: Git4Idea plugin for VCS integration</li>
+</ul>
+
+<h3>Support</h3>
+
+<ul>
+  <li><a href="https://github.com/JirakJ/architecture-breadcrumbs/issues">Documentation</a></li>
+  <li><a href="https://github.com/JirakJ/architecture-breadcrumbs/issues">Issue Tracker (GitHub)</a></li>
+  <li><a href="https://github.com/JirakJ/architecture-breadcrumbs/issues">Email Support: support@jakubjirak.com</a></li>
+  <li><a href="https://github.com/JirakJ/architecture-breadcrumbs/issues">Community Forum</a></li>
+</ul>
+    ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
     <depends optional="true" config-file="git4idea-extensions.xml">Git4Idea</depends>
@@ -94,4 +185,18 @@
             <add-to-group group-id="GoToMenu" anchor="last"/>
         </action>
     </actions>
+
+    <change-notes><![CDATA[
+        <h3>What's New</h3>
+        <ul>
+            <li><b>6 Breadcrumb Categories</b> - Annotate code with Decision, Pattern, Constraint, Trade-off, Assumption, and Risk markers</li>
+            <li><b>Gutter Icons and Inlay Hints</b> - Visual markers in the editor with color-coded backgrounds for each category</li>
+            <li><b>Breadcrumb Explorer</b> - Dedicated tool window to browse all annotations by category or file</li>
+            <li><b>Quick Navigation</b> - Jump between related architectural annotations across the project</li>
+            <li><b>VCS-Friendly Storage</b> - Annotations stored in .arch-breadcrumbs.json for easy team sharing via Git</li>
+            <li><b>Multi-Language Support</b> - Works with Java, Kotlin, Python, JavaScript, TypeScript, and Go</li>
+            <li><b>Architecture Map</b> - Visual overview of your project's architectural structure (Pro)</li>
+            <li><b>Export to Diagrams</b> - Generate Mermaid and PlantUML diagrams from your breadcrumbs (Pro)</li>
+        </ul>
+    ]]></change-notes>
 </idea-plugin>
