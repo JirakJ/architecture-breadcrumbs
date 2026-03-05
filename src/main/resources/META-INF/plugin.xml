@@ -4,8 +4,7 @@
     <name>Architecture Breadcrumbs</name>
     <vendor email="support@jakubjirak.com" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
 
-    <description><![CDATA[
-<h2>Stop Losing Architecture Decisions — Embed Them in Your Code</h2>
+    <description><![CDATA[<h2>Stop Losing Architecture Decisions — Embed Them in Your Code</h2>
 
 <p>
   Architecture Breadcrumbs lets you embed architectural context directly in your codebase.
@@ -56,8 +55,6 @@
   <li>VCS-friendly storage via <code>.arch-breadcrumbs.json</code></li>
 </ul>
 
-<h3>Pro Features</h3>
-
 <ul>
   <li>Unlimited breadcrumbs and layers</li>
   <li>Architecture Map — visualize breadcrumbs across layers and modules</li>
@@ -67,41 +64,10 @@
   <li>Cross-linking between breadcrumbs</li>
 </ul>
 
-<h3>Team Features</h3>
-
 <ul>
   <li>Team dashboard with breadcrumb coverage and trends</li>
   <li>Team consistency checks across repositories</li>
 </ul>
-
-<h3>Pricing</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Tier</th>
-      <th>Price</th>
-      <th>Highlights</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Free</td>
-      <td>$0</td>
-      <td>All 6 categories, up to 20 breadcrumbs, 3 custom layers, gutter icons, explorer</td>
-    </tr>
-    <tr>
-      <td>Pro</td>
-      <td>$2.90/mo or $29/yr</td>
-      <td>Unlimited breadcrumbs/layers, Architecture Map, auto-detection, export, cross-linking</td>
-    </tr>
-    <tr>
-      <td>Team</td>
-      <td>$5.90/user/mo</td>
-      <td>All Pro features + team dashboard + team consistency checks</td>
-    </tr>
-  </tbody>
-</table>
 
 <h3>Supported Languages</h3>
 
@@ -122,8 +88,7 @@
   <li><a href="https://github.com/JirakJ/architecture-breadcrumbs/issues">Issue Tracker (GitHub)</a></li>
   <li><a href="https://github.com/JirakJ/architecture-breadcrumbs/issues">Email Support: support@jakubjirak.com</a></li>
   <li><a href="https://github.com/JirakJ/architecture-breadcrumbs/issues">Community Forum</a></li>
-</ul>
-    ]]></description>
+</ul>]]></description>
 
     <depends>com.intellij.modules.platform</depends>
     <depends optional="true" config-file="git4idea-extensions.xml">Git4Idea</depends>
@@ -165,6 +130,9 @@
         <!-- Startup activity -->
         <projectActivity
                 implementation="com.jakubjirak.archbreadcrumbs.ArchBreadcrumbsStartupActivity"/>
+    
+        <notificationGroup id="Architecture Breadcrumbs Feedback" displayType="BALLOON"/>
+        <projectActivity implementation="com.jakubjirak.archbreadcrumbs.feedback.FeedbackNotifier"/>
     </extensions>
 
     <actions>
