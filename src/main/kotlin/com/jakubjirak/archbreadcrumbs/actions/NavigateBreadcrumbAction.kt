@@ -6,7 +6,6 @@ import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.ui.popup.JBPopupFactory
-import com.jakubjirak.archbreadcrumbs.licensing.FreemiumGate
 import com.jakubjirak.archbreadcrumbs.model.Breadcrumb
 import com.jakubjirak.archbreadcrumbs.settings.BreadcrumbsSettings
 import com.jakubjirak.archbreadcrumbs.store.BreadcrumbStore
@@ -44,18 +43,11 @@ class NavigateBreadcrumbAction : AnAction() {
 
         val linked = store.getLinkedBreadcrumbs(currentBreadcrumb)
         if (linked.isEmpty()) {
-            notifyCrossLinkingIfFree(project)
             showAllBreadcrumbsPopup(project, store)
             return
         }
 
         showLinkedBreadcrumbsPopup(project, linked)
-    }
-
-    private fun notifyCrossLinkingIfFree(project: com.intellij.openapi.project.Project) {
-        if (!FreemiumGate.getInstance().isPaidFeatureAvailable(FreemiumGate.FEATURE_CROSS_LINKING)) {
-            LOG.info("Cross-linking not available in free tier")
-        }
     }
 
     private fun showAllBreadcrumbsPopup(project: com.intellij.openapi.project.Project, store: BreadcrumbStore) {

@@ -10,7 +10,6 @@ import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBTextField
 import com.intellij.util.ui.FormBuilder
 import com.intellij.util.ui.JBUI
-import com.jakubjirak.archbreadcrumbs.licensing.FreemiumGate
 import com.jakubjirak.archbreadcrumbs.model.Breadcrumb
 import com.jakubjirak.archbreadcrumbs.model.BreadcrumbCategory
 import com.jakubjirak.archbreadcrumbs.settings.BreadcrumbsSettings
@@ -29,18 +28,6 @@ class AddBreadcrumbAction : AnAction() {
         val virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE) ?: return
 
         val store = BreadcrumbStore.getInstance(project)
-        val gate = FreemiumGate.getInstance()
-
-        if (!gate.canAddBreadcrumb(store.getBreadcrumbCount())) {
-            com.intellij.notification.NotificationGroupManager.getInstance()
-                .getNotificationGroup("Architecture Breadcrumbs")
-                .createNotification(
-                    "Free tier limit reached (${FreemiumGate.MAX_FREE_BREADCRUMBS} breadcrumbs). Upgrade for unlimited.",
-                    com.intellij.notification.NotificationType.WARNING,
-                )
-                .notify(project)
-            return
-        }
 
         val document = editor.document
         val lineNumber = document.getLineNumber(editor.caretModel.offset) + 1
