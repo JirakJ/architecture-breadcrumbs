@@ -39,13 +39,13 @@
 - Configurable settings: enable/disable plugin, gutter icons, icon style, and individual categories
 - Multi-language support: Java, Kotlin, Python, JavaScript/TypeScript, Go
 - Git integration for automatic author detection via git blame
-- Cross-linking between breadcrumbs (Pro)
-- Architecture Map tool window (Pro)
-- Auto-detection of patterns and layers from package structure (Pro)
-- Layer consistency checks (Pro)
-- Export to Mermaid and PlantUML (Pro)
-- Unlimited layers and breadcrumbs (Pro)
-- Team dashboard with architecture overview (Team)
+- Cross-linking between breadcrumbs
+- Architecture Map tool window
+- Auto-detection of patterns and layers from package structure
+- Layer consistency checks
+- Export to Mermaid and PlantUML
+- Unlimited layers and breadcrumbs
+- Team dashboard with architecture overview
 - `.arch-breadcrumbs.yaml` project configuration support
 - Notification support via balloon notifications
 - Background indexation with breadcrumb parsing under 100ms

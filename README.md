@@ -8,26 +8,19 @@
 
 ## ✨ Features
 
-### Free Tier
 - **Breadcrumb annotations** — leave `// @arch:pattern=`, `// @arch:reason=`, `// @arch:link=`, `// @arch:layer=` comments in code
 - **Syntax highlighting** with colored backgrounds and inlay hints
 - **Gutter icons** — visual markers for each breadcrumb category (Decision, Pattern, Constraint, TODO, Warning, Context)
 - **Navigation** — Go to Related Breadcrumbs action
 - **Breadcrumbs tool window** — browse all breadcrumbs in your project
-- **Up to 3 custom layers** and **20 breadcrumbs**
 - **6 breadcrumb categories** — Decision 📋, Pattern 🔧, Constraint 🔒, TODO 📝, Warning ⚠️, Context 💡
 - **Multi-language support** — Java, Kotlin, Python, JavaScript/TypeScript, Go
-
-### Pro Tier ($2.90/month or $29/year)
+- **Unlimited breadcrumbs and layers**
 - **Architecture Map** tool window — visual overview of architectural structure
 - **Auto-detection** of patterns and layers from package structure
 - **Layer consistency checks**
 - **Export** to Mermaid and PlantUML diagrams
-- **Unlimited layers and breadcrumbs**
 - **Cross-linking** between breadcrumbs
-
-### Team Tier ($5.90/user/month)
-- All Pro features
 - **Team dashboard** with architecture overview
 - **Consistency checks** across the team
 
@@ -76,7 +69,7 @@ Right-click in the editor → **Add Architecture Breadcrumb**, or use the keyboa
 - **Text** — the breadcrumb description
 - **Category** — Decision, Pattern, Constraint, TODO, Warning, or Context
 - **Author** — auto-filled from system user
-- **Linked breadcrumbs** — comma-separated IDs for cross-references (Pro)
+- **Linked breadcrumbs** — comma-separated IDs for cross-references
 
 ### Breadcrumb Syntax
 ```java

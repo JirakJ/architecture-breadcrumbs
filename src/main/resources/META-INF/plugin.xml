@@ -1,6 +1,5 @@
 <idea-plugin>
     <id>com.jakubjirak.archbreadcrumbs</id>
-    <product-descriptor code="PARCHBREADCRMBS" release-date="20260215" release-version="20262" optional="true"/>
     <name>Architecture Breadcrumbs</name>
     <vendor email="support@jakubjirak.com" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
 
@@ -163,8 +162,8 @@
             <li><b>Quick Navigation</b> - Jump between related architectural annotations across the project</li>
             <li><b>VCS-Friendly Storage</b> - Annotations stored in .arch-breadcrumbs.json for easy team sharing via Git</li>
             <li><b>Multi-Language Support</b> - Works with Java, Kotlin, Python, JavaScript, TypeScript, and Go</li>
-            <li><b>Architecture Map</b> - Visual overview of your project's architectural structure (Pro)</li>
-            <li><b>Export to Diagrams</b> - Generate Mermaid and PlantUML diagrams from your breadcrumbs (Pro)</li>
+            <li><b>Architecture Map</b> - Visual overview of your project's architectural structure</li>
+            <li><b>Export to Diagrams</b> - Generate Mermaid and PlantUML diagrams from your breadcrumbs</li>
         </ul>
     ]]></change-notes>
 </idea-plugin>

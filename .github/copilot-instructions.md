@@ -24,7 +24,7 @@ JetBrains IDE plugin — systém architektonických anotací v kódu s vizualiza
 - **Index:** `BreadcrumbIndex` — file-based index pro rychlé vyhledávání breadcrumbs (StubIndex)
 - **Navigation:** `BreadcrumbRelatedProvider` — Go to Related Breadcrumbs action
 - **UI:** `ArchitectureMapToolWindow` — stromová vizualizace Layer → Pattern → File
-- **Auto-detection:** `PatternDetector` — heuristická detekce arch patterns z kódu (Paid)
+- **Auto-detection:** `PatternDetector` — heuristická detekce arch patterns z kódu
 
 ## Konvence
 - Balíčky: `com.jakubjirak.archbreadcrumbs.*`
@@ -44,11 +44,7 @@ JetBrains IDE plugin — systém architektonických anotací v kódu s vizualiza
 - Smart mode check (`DumbService.isDumb()`) kde potřeba
 
 ## Freemium architektura
-- `FreemiumGate` centrální guard: `FreemiumGate.isPaidFeatureAvailable("feature.id")`
-- JetBrains Marketplace Licensing API přes `<product-descriptor>` v `plugin.xml`
-- Paid UI elementy: skryté nebo disabled ve free tieru (ne crash/error)
-- Trial: 30 dní plný přístup, pak downgrade na free tier
-- Upgrade prompt: max 1× denně, non-intrusive balloon
+- Plugin je plně zdarma — žádné freemium omezení ani licensing gate
 
 ## CI/CD
 - GitHub Actions: `./gradlew check`, `verifyPlugin`, `runPluginVerifier`
@@ -62,5 +58,4 @@ JetBrains IDE plugin — systém architektonických anotací v kódu s vizualiza
 - Action ikony: 16×16 + 13×13 SVG (light + dark varianty)
 
 ## Freemium hranice
-- Free: syntax highlighting, navigace, 3 layers
-- Paid: architecture map, auto-detection, export, team dashboard
+- Žádné — všechny funkce jsou zdarma

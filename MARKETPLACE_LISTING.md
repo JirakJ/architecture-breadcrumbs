@@ -5,7 +5,7 @@
 **Plugin Name:** Architecture Breadcrumbs
 **Plugin ID:** `com.jakubjirak.archbreadcrumbs`
 **Version:** 2026.2.11
-**Product Code:** PARCHBREADCRMBS
+**Product Code:** (none — free plugin)
 **Category:** Code Tools
 **Tags:** architecture, design-patterns, code-documentation, code-navigation, software-architecture, annotations, breadcrumbs
 
@@ -68,27 +68,20 @@ Code tells you what — Architecture Breadcrumbs tells you why. Embed architectu
 // @arch:layer=infrastructure
 ```
 
-#### 💎 Pricing Model
+#### 💎 All Features Included (Free)
 
-**FREE (Community):**
 - All 6 breadcrumb categories (Decision, Pattern, Constraint, TODO, Warning, Context)
 - Syntax highlighting, gutter icons, and inlay hints
 - Breadcrumb Explorer tool window with filtering and search
 - Cross-file navigation (Go to Related Breadcrumbs)
 - Multi-language support (Java, Kotlin, Python, JS/TS, Go)
-- Up to 3 custom layers and 20 breadcrumbs per project
+- Unlimited layers, patterns, and breadcrumbs
 - VCS-friendly storage
-
-**PRO ($2.90/month or $29/year):**
-- **Architecture Map** — visual tree view: Layer → Pattern → File
+- Architecture Map — visual tree view: Layer → Pattern → File
 - Auto-detection of patterns (Repository, Factory, Observer) and layers from package structure
 - Layer consistency checks and architectural violation detection
-- Diagram export to **Mermaid** and **PlantUML** formats
-- Unlimited layers, patterns, and breadcrumbs
+- Diagram export to Mermaid and PlantUML formats
 - Cross-linking between breadcrumbs
-
-**TEAM ($5.90/user/month):**
-- Everything in Pro
 - Team dashboard with architecture coverage metrics
 - Team-wide consistency checks across projects
 - Centralized architecture overview
@@ -122,8 +115,8 @@ Code tells you what — Architecture Breadcrumbs tells you why. Embed architectu
 1. **Breadcrumb annotations** — Editor showing colored `@arch:` comments with gutter icons and inlay hints
 2. **Breadcrumb Explorer** — Tool window listing all breadcrumbs with category filters
 3. **Cross-file navigation** — Jumping from one breadcrumb to a related breadcrumb in another file
-4. **Architecture Map (Pro)** — Visual tree showing Layer → Pattern → File hierarchy
-5. **Diagram export (Pro)** — Generated Mermaid or PlantUML diagram of architectural layers
+4. **Architecture Map** — Visual tree showing Layer → Pattern → File hierarchy
+5. **Diagram export** — Generated Mermaid or PlantUML diagram of architectural layers
 6. **Add breadcrumb dialog** — Keyboard shortcut popup for creating a new breadcrumb
 7. **Settings panel** — Configuration for layers, patterns, colors, and filters
 
@@ -178,8 +171,6 @@ architecture, breadcrumbs, design patterns, code documentation, architectural an
 - [ ] Screenshots (minimum 5) captured and uploaded
 - [ ] Short description within 255-character limit
 - [ ] Full description formatted with HTML for marketplace rendering
-- [ ] Pricing tiers configured in JetBrains Marketplace portal
-- [ ] Product code `PARCHBREADCRMBS` registered
 - [ ] Vendor profile completed (name, email, website)
 - [ ] Support channels documented and active
 - [ ] Plugin tested on minimum supported IDE version (2024.3)
