@@ -2,6 +2,8 @@
     <id>com.jakubjirak.archbreadcrumbs</id>
     <name>Architecture Breadcrumbs</name>
     <vendor email="support@jakubjirak.com" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
+    <product-descriptor code="PARCHITECTUREBR" release-date="20260418" release-version="20263" optional="true"/>
+
 
     <description><![CDATA[<h2>Stop Losing Architecture Decisions — Embed Them in Your Code</h2>
 
