@@ -12,3 +12,4 @@ jobs:
     with:
       gradle-plugin-version: "2.x"
       runner-label: "rpi"
+      java-version: "21"
