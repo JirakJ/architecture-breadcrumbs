@@ -4,7 +4,6 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.actionSystem.ActionUpdateThread
-import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.jakubjirak.archbreadcrumbs.model.Breadcrumb
 import com.jakubjirak.archbreadcrumbs.settings.BreadcrumbsSettings
@@ -98,9 +97,5 @@ class NavigateBreadcrumbAction : AnAction() {
     override fun update(e: AnActionEvent) {
         val settings = BreadcrumbsSettings.getInstance()
         e.presentation.isEnabledAndVisible = settings.enabled && e.project != null
-    }
-
-    companion object {
-        private val LOG = Logger.getInstance(NavigateBreadcrumbAction::class.java)
     }
 }

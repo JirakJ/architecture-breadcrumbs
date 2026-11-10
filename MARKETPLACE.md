@@ -32,38 +32,8 @@ Track design patterns, architectural decisions, and layer boundaries with inline
   <li><b>VCS-friendly</b> — breadcrumbs are standard code comments; code compiles without the plugin</li>
 </ul>
 
-<h2>Free Tier</h2>
-<p>Full breadcrumb authoring and navigation — no credit card required:</p>
-<ul>
-  <li>Breadcrumb syntax highlighting with colored backgrounds</li>
-  <li>Gutter icons with hover tooltips</li>
-  <li>All 6 breadcrumb categories (Decision, Pattern, Constraint, TODO, Warning, Context)</li>
-  <li>Basic navigation with "Go to Related Breadcrumbs" (<code>Ctrl+Shift+B</code>)</li>
-  <li>Breadcrumbs tool window with filtering and search</li>
-  <li>Up to 3 custom architectural layers</li>
-  <li>Multi-language support (Java, Kotlin, Python, JS/TS, Go)</li>
-  <li>Inlay hints for pattern and layer info</li>
-</ul>
-
-<h2>Pro Tier ($2.90/month)</h2>
-<p>Designed for teams who want to visualize and enforce architecture:</p>
-<ul>
-  <li><b>Architecture Map</b> — visual tree overview organized by Layer → Pattern → File</li>
-  <li><b>Auto-detection</b> — heuristic recognition of patterns (Repository, Factory, Observer) and layers from package structure</li>
-  <li><b>Layer consistency checks</b> — validate architectural layer rules and detect violations</li>
-  <li><b>Diagram export</b> — export architecture to Mermaid and PlantUML formats</li>
-  <li><b>Unlimited layers, patterns, and breadcrumbs</b></li>
-  <li><b>Cross-linking</b> — link related breadcrumbs across your codebase</li>
-</ul>
-
-<h2>Team Tier ($5.90/user/month)</h2>
-<p>Designed for teams who need shared architectural governance:</p>
-<ul>
-  <li>All Pro features included</li>
-  <li><b>Team dashboard</b> — architecture coverage metrics across the codebase</li>
-  <li><b>Team-wide consistency checks</b> — validate architectural rules across projects</li>
-  <li><b>Centralized architecture overview</b> — unified view of architectural decisions</li>
-</ul>
+<h2>Free &amp; Open Source</h2>
+<p>Every feature — including the Architecture Map, auto-detection, layer consistency checks, diagram export and unlimited layers — is free for everyone, no license needed. Source code: <a href="https://github.com/JirakJ/architecture-breadcrumbs">GitHub</a> (Apache-2.0).</p>
 
 <h2>Getting Started</h2>
 <ol>
@@ -97,15 +67,12 @@ architecture, design-patterns, code-documentation, code-navigation, software-arc
 Code Tools
 
 ## Pricing
-| Tier | Price | Features |
-|------|-------|----------|
-| Free | $0 | Breadcrumb annotations, 6 categories, gutter icons, tool window, navigation, 3 custom layers, multi-language |
-| Pro | $2.90/month or $29/year | Architecture Map, auto-detection, layer consistency checks, Mermaid/PlantUML export, unlimited layers |
-| Team | $5.90/user/month | All Pro features + team dashboard, team-wide consistency checks, centralized architecture overview |
+
+Free & open source (Apache-2.0) — every feature is available to everyone, no license needed.
 
 ## Screenshots Needed
 1. **Editor with breadcrumbs** — source code showing colored breadcrumb annotations with gutter icons and inlay hints
 2. **Breadcrumbs tool window** — the centralized browsing panel with filtering by category and search
-3. **Architecture Map (Pro)** — visual tree view showing Layer → Pattern → File hierarchy
-4. **Layer consistency check (Pro)** — inspection results showing architectural layer violations
-5. **Diagram export (Pro)** — generated Mermaid or PlantUML diagram of the project architecture
+3. **Architecture Map** — visual tree view showing Layer → Pattern → File hierarchy
+4. **Layer consistency check** — inspection results showing architectural layer violations
+5. **Diagram export** — generated Mermaid or PlantUML diagram of the project architecture
