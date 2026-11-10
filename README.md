@@ -1,8 +1,8 @@
 # Architecture Breadcrumbs
 
 [![Build](https://github.com/JirakJ/architecture-breadcrumbs/actions/workflows/build.yml/badge.svg)](https://github.com/JirakJ/architecture-breadcrumbs/actions/workflows/build.yml)
-[![Version](https://img.shields.io/badge/version-2026.2.2-blue.svg)](https://github.com/JirakJ/architecture-breadcrumbs/releases)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-2026.8.0-blue.svg)](https://github.com/JirakJ/architecture-breadcrumbs/releases)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
 > Stop Losing Architecture Decisions — Embed Them in Your Code
 
@@ -103,8 +103,16 @@ cd architecture-breadcrumbs
 
 ## 📝 License
 
-MIT License — see [LICENSE](LICENSE)
+Apache License 2.0 — see [LICENSE](LICENSE) and [NOTICE](NOTICE).
 
 ## 👤 Author
 
 **Jakub Jirák** — [@JirakJ](https://github.com/JirakJ)
+
+## Free & open source
+
+Since version 2026.8.0 the plugin is completely free — every feature is unlocked and no license is needed. The source code is open source under the [Apache License 2.0](LICENSE).
+
+## Contributing
+
+Issues and pull requests are welcome at https://github.com/JirakJ/architecture-breadcrumbs.
