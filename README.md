@@ -1,7 +1,7 @@
 # Architecture Breadcrumbs
 
 [![Plugin Verification](https://github.com/JirakJ/architecture-breadcrumbs/actions/workflows/verify.yml/badge.svg)](https://github.com/JirakJ/architecture-breadcrumbs/actions/workflows/verify.yml)
-[![Version](https://img.shields.io/badge/version-2026.8.0-blue.svg)](https://github.com/JirakJ/architecture-breadcrumbs/releases)
+[![Version](https://img.shields.io/badge/version-2026.9.0-blue.svg)](https://github.com/JirakJ/architecture-breadcrumbs/releases)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
 > Stop losing architecture decisions — pin them to the lines of code they describe.
