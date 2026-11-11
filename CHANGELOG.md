@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2026.9.0] - 2026-11-11
+
 ### Fixed
 - Gutter icon was added once per token on a breadcrumb line; now exactly one icon per breadcrumb.
 - New breadcrumbs show their gutter icon immediately (highlighting is restarted after adding).
