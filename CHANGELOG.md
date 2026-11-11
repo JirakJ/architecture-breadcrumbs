@@ -1,5 +1,26 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+- Gutter icon was added once per token on a breadcrumb line; now exactly one icon per breadcrumb.
+- New breadcrumbs show their gutter icon immediately (highlighting is restarted after adding).
+- Tool window updates from background store loads now happen on the EDT.
+- A hand-edited `.arch-breadcrumbs.json` with missing fields or an unknown category no longer causes
+  NullPointerExceptions; invalid entries are skipped and optional fields defaulted.
+- Files in a sibling directory whose name starts with the project path (e.g. `/proj2` vs `/proj`)
+  were stored with a broken relative path.
+- Empty breadcrumb text is now reported in the dialog instead of silently ignoring OK.
+- Minimum IDE raised to 2024.2 (build 242): the plugin is compiled to Java 21 bytecode, which the
+  JBR 17 runtime of IDEs 2023.2–2024.1 cannot load.
+
+### Removed
+- Non-functional "Icon style" setting.
+- Description/README claims for features that never shipped (`@arch:` comment syntax, syntax
+  highlighting, inlay hints, architecture map, auto-detection, layer checks, Mermaid/PlantUML export,
+  team dashboard, Go-specific support, `.arch-breadcrumbs.yaml`), unused git helper classes, the unused
+  message bundle, the empty Git4Idea optional dependency and the leftover ProGuard obfuscation task.
+
 ## [2026.8.0] - 2026-11-10
 
 ### Changed

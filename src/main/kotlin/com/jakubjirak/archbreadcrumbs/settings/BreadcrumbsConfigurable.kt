@@ -12,53 +12,45 @@ class BreadcrumbsConfigurable : BoundConfigurable("Architecture Breadcrumbs") {
             row {
                 checkBox("Enable Architecture Breadcrumbs")
                     .bindSelected(settings::enabled)
-                    .comment("Toggle all architecture breadcrumb annotations on or off")
+                    .comment("Turns gutter icons and the add/navigate actions on or off")
             }
             row {
                 checkBox("Show gutter icons")
                     .bindSelected(settings::showGutterIcons)
                     .comment("Display icons in the editor gutter for each breadcrumb")
             }
-            row("Icon style:") {
-                comboBox(listOf("Default", "Minimal", "Colorful"))
-                    .bindItem(
-                        { settings.iconStyle },
-                        { settings.iconStyle = it ?: "Default" }
-                    )
-                    .comment("Visual style used for gutter icons")
-            }
         }
 
-        group("Breadcrumb Categories") {
+        group("Gutter Icons per Category") {
             row {
                 checkBox("Decision")
                     .bindSelected(settings::enableDecision)
-                    .comment("Track architectural decisions captured in code comments")
+                    .comment("Show gutter icons for Decision breadcrumbs")
             }
             row {
                 checkBox("Pattern")
                     .bindSelected(settings::enablePattern)
-                    .comment("Track design pattern annotations and usages")
+                    .comment("Show gutter icons for Pattern breadcrumbs")
             }
             row {
                 checkBox("Constraint")
                     .bindSelected(settings::enableConstraint)
-                    .comment("Track architectural constraints and invariants")
+                    .comment("Show gutter icons for Constraint breadcrumbs")
             }
             row {
                 checkBox("TODO (Architecture)")
                     .bindSelected(settings::enableTodoArch)
-                    .comment("Track architecture-related TODO items")
+                    .comment("Show gutter icons for architecture TODO breadcrumbs")
             }
             row {
                 checkBox("Warning")
                     .bindSelected(settings::enableWarning)
-                    .comment("Track architectural warnings and potential issues")
+                    .comment("Show gutter icons for Warning breadcrumbs")
             }
             row {
                 checkBox("Context")
                     .bindSelected(settings::enableContext)
-                    .comment("Track contextual notes about architectural intent")
+                    .comment("Show gutter icons for Context breadcrumbs")
             }
         }
     }
