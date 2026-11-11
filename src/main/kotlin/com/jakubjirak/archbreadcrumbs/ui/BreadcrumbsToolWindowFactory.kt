@@ -1,17 +1,18 @@
 package com.jakubjirak.archbreadcrumbs.ui
 
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.SearchTextField
-import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.content.ContentFactory
 import com.intellij.ui.table.JBTable
 import com.intellij.util.ui.JBUI
 import com.jakubjirak.archbreadcrumbs.model.Breadcrumb
 import com.jakubjirak.archbreadcrumbs.model.BreadcrumbCategory
+import com.jakubjirak.archbreadcrumbs.store.BreadcrumbQueries
 import com.jakubjirak.archbreadcrumbs.store.BreadcrumbStore
 import java.awt.BorderLayout
 import java.awt.event.MouseAdapter
@@ -53,7 +54,8 @@ class BreadcrumbsToolWindowPanel(private val project: Project) : JPanel(BorderLa
         loadBreadcrumbs()
 
         val store = BreadcrumbStore.getInstance(project)
-        store.addListener { loadBreadcrumbs() }
+        // Store changes may come from any thread; the table must only be touched on the EDT.
+        store.addListener { ApplicationManager.getApplication().invokeLater { loadBreadcrumbs() } }
     }
 
     private fun setupUI() {
@@ -85,29 +87,17 @@ class BreadcrumbsToolWindowPanel(private val project: Project) : JPanel(BorderLa
         })
         add(JBScrollPane(table), BorderLayout.CENTER)
 
-        // Empty state
-        val emptyLabel = JBLabel("No breadcrumbs found. Use Ctrl+Shift+B to add one.")
-        emptyLabel.horizontalAlignment = JBLabel.CENTER
-        emptyLabel.border = JBUI.Borders.empty(20)
+        table.emptyText.text = "No breadcrumbs found. Use Ctrl+Shift+B to add one."
     }
 
     private fun loadBreadcrumbs() {
-        val store = BreadcrumbStore.getInstance(project)
-        var breadcrumbs = store.getAllBreadcrumbs()
-
-        // Apply category filter
-        val selectedCategory = categoryFilter.selectedItem as? String
-        if (selectedCategory != null && selectedCategory != "All Categories") {
-            breadcrumbs = breadcrumbs.filter { it.category.displayName == selectedCategory }
-        }
-
-        // Apply search filter
-        val query = searchField.text?.trim() ?: ""
-        if (query.isNotEmpty()) {
-            breadcrumbs = store.searchBreadcrumbs(query).let { searchResults ->
-                breadcrumbs.filter { b -> searchResults.any { it.id == b.id } }
-            }
-        }
+        val selectedName = categoryFilter.selectedItem as? String
+        val category = BreadcrumbCategory.entries.firstOrNull { it.displayName == selectedName }
+        val breadcrumbs = BreadcrumbQueries.filter(
+            BreadcrumbStore.getInstance(project).getAllBreadcrumbs(),
+            category,
+            searchField.text.orEmpty(),
+        )
 
         displayedBreadcrumbs = breadcrumbs
         tableModel.rowCount = 0

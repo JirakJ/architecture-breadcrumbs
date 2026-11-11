@@ -1,11 +1,13 @@
 package com.jakubjirak.archbreadcrumbs.actions
 
+import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.ui.DialogWrapper
+import com.intellij.openapi.ui.ValidationInfo
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBTextField
 import com.intellij.util.ui.FormBuilder
@@ -13,10 +15,10 @@ import com.intellij.util.ui.JBUI
 import com.jakubjirak.archbreadcrumbs.model.Breadcrumb
 import com.jakubjirak.archbreadcrumbs.model.BreadcrumbCategory
 import com.jakubjirak.archbreadcrumbs.settings.BreadcrumbsSettings
+import com.jakubjirak.archbreadcrumbs.store.BreadcrumbQueries
 import com.jakubjirak.archbreadcrumbs.store.BreadcrumbStore
 import javax.swing.JComboBox
 import javax.swing.JComponent
-import javax.swing.JPanel
 
 class AddBreadcrumbAction : AnAction() {
     override fun getActionUpdateThread(): ActionUpdateThread = ActionUpdateThread.BGT
@@ -33,11 +35,9 @@ class AddBreadcrumbAction : AnAction() {
         val lineNumber = document.getLineNumber(editor.caretModel.offset) + 1
 
         val basePath = project.basePath ?: return
-        val filePath = virtualFile.path.let {
-            if (it.startsWith(basePath)) it.removePrefix(basePath).removePrefix("/") else it
-        }
+        val filePath = BreadcrumbQueries.relativePath(basePath, virtualFile.path)
 
-        val dialog = AddBreadcrumbDialog(project)
+        val dialog = AddBreadcrumbDialog()
         if (dialog.showAndGet()) {
             val linkedIds = dialog.getLinkedIds()
             val breadcrumb = Breadcrumb(
@@ -49,6 +49,8 @@ class AddBreadcrumbAction : AnAction() {
                 linkedBreadcrumbs = linkedIds,
             )
             store.addBreadcrumb(breadcrumb)
+            // Re-run line markers so the new gutter icon shows up immediately.
+            DaemonCodeAnalyzer.getInstance(project).restart()
             LOG.info("Added breadcrumb at $filePath:$lineNumber")
         }
     }
@@ -63,9 +65,7 @@ class AddBreadcrumbAction : AnAction() {
     }
 }
 
-class AddBreadcrumbDialog(
-    @Suppress("UNUSED_PARAMETER") project: com.intellij.openapi.project.Project,
-) : DialogWrapper(true) {
+class AddBreadcrumbDialog : DialogWrapper(true) {
 
     private val textField = JBTextField().apply {
         columns = 40
@@ -103,14 +103,8 @@ class AddBreadcrumbDialog(
 
     fun getAuthor(): String = authorField.text.trim()
 
-    fun getLinkedIds(): List<String> {
-        val text = linkedField.text?.trim() ?: ""
-        if (text.isEmpty()) return emptyList()
-        return text.split(",").map { it.trim() }.filter { it.isNotEmpty() }
-    }
+    fun getLinkedIds(): List<String> = BreadcrumbQueries.parseLinkedIds(linkedField.text)
 
-    override fun doOKAction() {
-        if (getBreadcrumbText().isEmpty()) return
-        super.doOKAction()
-    }
+    override fun doValidate(): ValidationInfo? =
+        if (getBreadcrumbText().isEmpty()) ValidationInfo("Breadcrumb text must not be empty", textField) else null
 }

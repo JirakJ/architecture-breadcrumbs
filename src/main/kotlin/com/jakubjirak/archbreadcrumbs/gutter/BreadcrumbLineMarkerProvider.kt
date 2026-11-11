@@ -2,39 +2,49 @@ package com.jakubjirak.archbreadcrumbs.gutter
 
 import com.intellij.codeInsight.daemon.LineMarkerInfo
 import com.intellij.codeInsight.daemon.LineMarkerProvider
-import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.markup.GutterIconRenderer
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiFile
-import com.jakubjirak.archbreadcrumbs.model.BreadcrumbCategory
 import com.jakubjirak.archbreadcrumbs.settings.BreadcrumbsSettings
+import com.jakubjirak.archbreadcrumbs.store.BreadcrumbQueries
 import com.jakubjirak.archbreadcrumbs.store.BreadcrumbStore
 
+/**
+ * Shows one gutter icon per stored breadcrumb, anchored on the first non-whitespace leaf of its line.
+ */
 class BreadcrumbLineMarkerProvider : LineMarkerProvider {
 
     @Suppress("ReturnCount")
     override fun getLineMarkerInfo(element: PsiElement): LineMarkerInfo<*>? {
+        if (element.firstChild != null) return null
         val settings = BreadcrumbsSettings.getInstance()
         if (!settings.enabled || !settings.showGutterIcons) return null
 
         val psiFile = element.containingFile ?: return null
-        if (element != psiFile.findElementAt(element.textOffset)) return null
-
-        val project = element.project
-        val store = BreadcrumbStore.getInstance(project)
-        val filePath = getRelativePath(project, psiFile) ?: return null
+        val virtualFile = psiFile.virtualFile ?: return null
+        val basePath = element.project.basePath ?: return null
         val document = psiFile.viewProvider.document ?: return null
-        val lineNumber = document.getLineNumber(element.textOffset) + 1
 
-        val breadcrumb = store.getBreadcrumbsForFile(filePath).find { it.lineNumber == lineNumber } ?: return null
-        if (!isCategoryEnabled(settings, breadcrumb.category)) return null
+        val offset = element.textRange.startOffset
+        val lineIndex = document.getLineNumber(offset)
+        val anchor = firstNonWhitespaceOffset(
+            document.charsSequence,
+            document.getLineStartOffset(lineIndex),
+            document.getLineEndOffset(lineIndex),
+        )
+        if (anchor != offset) return null
 
-        LOG.debug("Line marker found for breadcrumb ${breadcrumb.id} at $filePath:$lineNumber")
+        val filePath = BreadcrumbQueries.relativePath(basePath, virtualFile.path)
+        val breadcrumb = BreadcrumbStore.getInstance(element.project)
+            .getBreadcrumbsForFile(filePath)
+            .firstOrNull { it.lineNumber == lineIndex + 1 && settings.isCategoryEnabled(it.category) }
+            ?: return null
+
+        val tooltip = "${breadcrumb.category.icon} ${breadcrumb.category.displayName}: ${breadcrumb.text}"
         return LineMarkerInfo(
             element,
             element.textRange,
-            BreadcrumbGutterIconRenderer.getIconForCategory(breadcrumb.category),
-            { "${breadcrumb.category.icon} ${breadcrumb.category.displayName}: ${breadcrumb.text}" },
+            BreadcrumbIcons.forCategory(breadcrumb.category),
+            { tooltip },
             null,
             GutterIconRenderer.Alignment.LEFT,
             { "${breadcrumb.category.displayName}: ${breadcrumb.text}" },
@@ -42,28 +52,12 @@ class BreadcrumbLineMarkerProvider : LineMarkerProvider {
     }
 
     companion object {
-        private val LOG = Logger.getInstance(BreadcrumbLineMarkerProvider::class.java)
-
-        private fun getRelativePath(project: com.intellij.openapi.project.Project, psiFile: PsiFile): String? {
-            val virtualFile = psiFile.virtualFile ?: return null
-            val basePath = project.basePath ?: return null
-            val filePath = virtualFile.path
-            return if (filePath.startsWith(basePath)) {
-                filePath.removePrefix(basePath).removePrefix("/")
-            } else {
-                filePath
+        /** Offset of the first non-whitespace character in `[start, end)`, or `-1` for a blank line. */
+        internal fun firstNonWhitespaceOffset(text: CharSequence, start: Int, end: Int): Int {
+            for (i in start until end) {
+                if (!text[i].isWhitespace()) return i
             }
-        }
-
-        private fun isCategoryEnabled(settings: BreadcrumbsSettings, category: BreadcrumbCategory): Boolean {
-            return when (category) {
-                BreadcrumbCategory.DECISION -> settings.enableDecision
-                BreadcrumbCategory.PATTERN -> settings.enablePattern
-                BreadcrumbCategory.CONSTRAINT -> settings.enableConstraint
-                BreadcrumbCategory.TODO_ARCH -> settings.enableTodoArch
-                BreadcrumbCategory.WARNING -> settings.enableWarning
-                BreadcrumbCategory.CONTEXT -> settings.enableContext
-            }
+            return -1
         }
     }
 }

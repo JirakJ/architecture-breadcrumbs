@@ -6,6 +6,7 @@ import com.intellij.openapi.components.RoamingType
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.XmlSerializerUtil
+import com.jakubjirak.archbreadcrumbs.model.BreadcrumbCategory
 
 @State(
     name = "BreadcrumbsSettings",
@@ -15,7 +16,6 @@ class BreadcrumbsSettings : PersistentStateComponent<BreadcrumbsSettings> {
 
     var enabled: Boolean = true
     var showGutterIcons: Boolean = true
-    var iconStyle: String = "Default"
 
     var enableDecision: Boolean = true
     var enablePattern: Boolean = true
@@ -23,6 +23,15 @@ class BreadcrumbsSettings : PersistentStateComponent<BreadcrumbsSettings> {
     var enableTodoArch: Boolean = true
     var enableWarning: Boolean = true
     var enableContext: Boolean = true
+
+    fun isCategoryEnabled(category: BreadcrumbCategory): Boolean = when (category) {
+        BreadcrumbCategory.DECISION -> enableDecision
+        BreadcrumbCategory.PATTERN -> enablePattern
+        BreadcrumbCategory.CONSTRAINT -> enableConstraint
+        BreadcrumbCategory.TODO_ARCH -> enableTodoArch
+        BreadcrumbCategory.WARNING -> enableWarning
+        BreadcrumbCategory.CONTEXT -> enableContext
+    }
 
     override fun getState(): BreadcrumbsSettings = this
 

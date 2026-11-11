@@ -1,8 +1,5 @@
 package com.jakubjirak.archbreadcrumbs.store
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
 import com.jakubjirak.archbreadcrumbs.model.Breadcrumb
 import com.jakubjirak.archbreadcrumbs.model.BreadcrumbCategory
 import org.junit.jupiter.api.Assertions.*
@@ -14,8 +11,6 @@ class BreadcrumbStoreTest {
 
     @TempDir
     lateinit var tempDir: File
-
-    private val gson: Gson = GsonBuilder().setPrettyPrinting().create()
 
     @Test
     fun `load breadcrumbs from valid JSON file`() {
@@ -210,18 +205,15 @@ class BreadcrumbStoreTest {
 
     private fun writeStoreFile(breadcrumbs: List<Breadcrumb>) {
         val file = tempDir.resolve(BreadcrumbStore.STORE_FILE_NAME)
-        file.writeText(gson.toJson(breadcrumbs))
+        file.writeText(BreadcrumbJson.encode(breadcrumbs))
     }
 
     private fun readStoreFile(): List<Breadcrumb> {
         val file = tempDir.resolve(BreadcrumbStore.STORE_FILE_NAME)
         if (!file.exists()) return emptyList()
-        val json = file.readText()
-        if (json.isBlank()) return emptyList()
         return try {
-            val type = object : TypeToken<List<Breadcrumb>>() {}.type
-            gson.fromJson(json, type) ?: emptyList()
-        } catch (_: Exception) {
+            BreadcrumbJson.decode(file.readText())
+        } catch (_: com.google.gson.JsonParseException) {
             emptyList()
         }
     }
