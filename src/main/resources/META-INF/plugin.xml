@@ -4,94 +4,37 @@
     <vendor email="support@jakubjirak.com" url="https://github.com/JirakJ/architecture-breadcrumbs">Jakub Jirák</vendor>
 
 
-    <description><![CDATA[<h2>Stop Losing Architecture Decisions — Embed Them in Your Code</h2>
+    <description><![CDATA[<h2>Stop Losing Architecture Decisions — Pin Them to Your Code</h2>
 
 <p>
-  Architecture Breadcrumbs lets you embed architectural context directly in your codebase.
-  Annotate decisions, patterns, constraints, trade-offs, assumptions, and risks using
-  simple structured comments. Your reasoning stays with your code — versioned, searchable,
-  and visible to every developer on the team.
+  Architecture Breadcrumbs lets you attach architectural notes — decisions, patterns, constraints,
+  TODOs, warnings and context — to specific lines of your code. Breadcrumbs are stored in
+  <code>.arch-breadcrumbs.json</code> at the project root, so they are versioned and shared with
+  your team through git.
 </p>
 
-<h3>Why Architecture Breadcrumbs?</h3>
-
-<p>
-  Architectural knowledge degrades over time. Critical decisions end up in forgotten wiki pages,
-  buried Slack threads, or the minds of people who have moved on. Architecture Breadcrumbs keeps
-  that knowledge where it belongs — right next to the code it describes.
-</p>
-
-<h3>Breadcrumb Categories</h3>
-
+<h3>Features</h3>
 <ul>
-  <li><strong>Decision</strong> — Why a specific approach was chosen</li>
-  <li><strong>Pattern</strong> — Which design patterns are in use and why</li>
-  <li><strong>Constraint</strong> — Hard limits from business, regulations, or infrastructure</li>
-  <li><strong>Trade-off</strong> — What was sacrificed and what was gained</li>
-  <li><strong>Assumption</strong> — Hidden assumptions that should stay visible</li>
-  <li><strong>Risk</strong> — Known risks flagged for ongoing awareness</li>
+  <li><b>Add Architecture Breadcrumb</b> — editor popup menu or <code>Ctrl+Shift+B</code>: text, category, author and optional links to other breadcrumbs</li>
+  <li><b>Gutter icons</b> — one icon per breadcrumb line, with the note as tooltip; can be toggled per category</li>
+  <li><b>Breadcrumbs tool window</b> — table of all breadcrumbs with category filter and full-text search; double-click to jump to the line</li>
+  <li><b>Navigate Linked Breadcrumbs</b> — <i>Go To</i> menu: jump to breadcrumbs linked from the one at the caret, or pick from all breadcrumbs</li>
+  <li><b>Six categories</b> — Decision, Pattern, Constraint, TODO, Warning, Context</li>
+  <li>Works in any file type</li>
 </ul>
-
-<h3>Annotations</h3>
-
-<p>Add breadcrumbs using structured comment annotations:</p>
-
-<pre><code>// @arch:pattern=Repository @arch:reason=Decouples domain from persistence
-// @arch:layer=infrastructure @arch:link=ADR-042</code></pre>
-
-<p>
-  Annotations are plain comments in your source files. They work with your existing
-  version control workflow — no external files or sync tools required.
-</p>
-
-<h3>IDE Integration</h3>
-
-<ul>
-  <li>Syntax highlighting with colored backgrounds for each category</li>
-  <li>Inlay hints showing breadcrumb details inline</li>
-  <li>Gutter icons for quick identification</li>
-  <li>Navigation between related breadcrumbs</li>
-  <li>Breadcrumbs Tool Window — browse by category or file</li>
-  <li>VCS-friendly storage via <code>.arch-breadcrumbs.json</code></li>
-</ul>
-
-<ul>
-  <li>Unlimited breadcrumbs and layers</li>
-  <li>Architecture Map — visualize breadcrumbs across layers and modules</li>
-  <li>Auto-detection of common patterns and layer assignments</li>
-  <li>Layer consistency checks</li>
-  <li>Export to Mermaid and PlantUML diagrams</li>
-  <li>Cross-linking between breadcrumbs</li>
-</ul>
-
-<ul>
-  <li>Team dashboard with breadcrumb coverage and trends</li>
-  <li>Team consistency checks across repositories</li>
-</ul>
-
-<h3>Supported Languages</h3>
-
-<p>Java, Kotlin, Python, JavaScript/TypeScript, Go</p>
 
 <h3>Requirements</h3>
-
 <ul>
-  <li>IntelliJ IDEA 2024.3+ (build 243+)</li>
-  <li>Java 21+</li>
-  <li>Optional: Git4Idea plugin for VCS integration</li>
+  <li>IntelliJ IDEA 2024.2+ (or any JetBrains IDE on build 242+)</li>
 </ul>
 
 <h3>Support</h3>
-
 <ul>
-  <li><a href="https://github.com/JirakJ/architecture-breadcrumbs/issues">Documentation</a></li>
+  <li><a href="https://github.com/JirakJ/architecture-breadcrumbs">Documentation</a></li>
   <li><a href="https://github.com/JirakJ/architecture-breadcrumbs/issues">Issue Tracker (GitHub)</a></li>
-  <li><a href="https://github.com/JirakJ/architecture-breadcrumbs/issues">Email Support: support@jakubjirak.com</a></li>
-  <li><a href="https://github.com/JirakJ/architecture-breadcrumbs/issues">Community Forum</a></li>
 </ul>]]></description>
 
     <depends>com.intellij.modules.platform</depends>
-    <depends optional="true" config-file="git4idea-extensions.xml">Git4Idea</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Settings page -->

@@ -1,28 +1,20 @@
 # Architecture Breadcrumbs
 
-[![Build](https://github.com/JirakJ/architecture-breadcrumbs/actions/workflows/build.yml/badge.svg)](https://github.com/JirakJ/architecture-breadcrumbs/actions/workflows/build.yml)
+[![Plugin Verification](https://github.com/JirakJ/architecture-breadcrumbs/actions/workflows/verify.yml/badge.svg)](https://github.com/JirakJ/architecture-breadcrumbs/actions/workflows/verify.yml)
 [![Version](https://img.shields.io/badge/version-2026.8.0-blue.svg)](https://github.com/JirakJ/architecture-breadcrumbs/releases)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
-> Stop Losing Architecture Decisions — Embed Them in Your Code
+> Stop losing architecture decisions — pin them to the lines of code they describe.
 
 ## ✨ Features
 
-- **Breadcrumb annotations** — leave `// @arch:pattern=`, `// @arch:reason=`, `// @arch:link=`, `// @arch:layer=` comments in code
-- **Syntax highlighting** with colored backgrounds and inlay hints
-- **Gutter icons** — visual markers for each breadcrumb category (Decision, Pattern, Constraint, TODO, Warning, Context)
-- **Navigation** — Go to Related Breadcrumbs action
-- **Breadcrumbs tool window** — browse all breadcrumbs in your project
-- **6 breadcrumb categories** — Decision 📋, Pattern 🔧, Constraint 🔒, TODO 📝, Warning ⚠️, Context 💡
-- **Multi-language support** — Java, Kotlin, Python, JavaScript/TypeScript, Go
-- **Unlimited breadcrumbs and layers**
-- **Architecture Map** tool window — visual overview of architectural structure
-- **Auto-detection** of patterns and layers from package structure
-- **Layer consistency checks**
-- **Export** to Mermaid and PlantUML diagrams
-- **Cross-linking** between breadcrumbs
-- **Team dashboard** with architecture overview
-- **Consistency checks** across the team
+- **Add Architecture Breadcrumb** — editor popup menu or `Ctrl+Shift+B`; text, category, author and optional links to other breadcrumbs
+- **Gutter icons** — one icon per breadcrumb line, tooltip shows the note; toggle per category
+- **Breadcrumbs tool window** — all breadcrumbs with category filter and full-text search; double-click to navigate
+- **Navigate Linked Breadcrumbs** — Go To menu; jumps to linked breadcrumbs or lets you pick any breadcrumb
+- **6 categories** — Decision 📋, Pattern 🔧, Constraint 🔒, TODO 📝, Warning ⚠️, Context 💡
+- **VCS-friendly storage** — `.arch-breadcrumbs.json` in the project root; commit it to share with the team
+- Works in any file type
 
 ## 📦 Installation
 
@@ -41,8 +33,8 @@
 1. Open any source file in your project
 2. Right-click in the editor and select **"Add Architecture Breadcrumb"** (or press `Ctrl+Shift+B`)
 3. Fill in the breadcrumb text, select a category, and optionally link to other breadcrumbs
-4. The breadcrumb appears as a gutter icon — click it to view details
-5. Open **View → Tool Windows → Breadcrumbs** to browse all breadcrumbs in the project
+4. The breadcrumb appears as a gutter icon — hover it to see the note
+5. Open **View → Tool Windows → Architecture Breadcrumbs** to browse all breadcrumbs in the project
 
 ## ⚙️ Configuration
 
@@ -50,9 +42,8 @@
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| Enable Architecture Breadcrumbs | `true` | Master toggle for the plugin |
+| Enable Architecture Breadcrumbs | `true` | Master toggle for gutter icons and the add/navigate actions |
 | Show gutter icons | `true` | Display gutter icons for breadcrumbs |
-| Icon style | `Default` | Icon style selection |
 | Enable Decision category | `true` | Show Decision breadcrumbs |
 | Enable Pattern category | `true` | Show Pattern breadcrumbs |
 | Enable Constraint category | `true` | Show Constraint breadcrumbs |
@@ -60,7 +51,6 @@
 | Enable Warning category | `true` | Show Warning breadcrumbs |
 | Enable Context category | `true` | Show Context breadcrumbs |
 
-You can also configure the plugin via `.arch-breadcrumbs.yaml` in your project root for color schemes, filters, and team settings.
 
 ## 🎯 Usage
 
@@ -71,13 +61,10 @@ Right-click in the editor → **Add Architecture Breadcrumb**, or use the keyboa
 - **Author** — auto-filled from system user
 - **Linked breadcrumbs** — comma-separated IDs for cross-references
 
-### Breadcrumb Syntax
-```java
-// @arch:pattern=Repository
-// @arch:reason=Separates data access from business logic
-// @arch:link=ADR-042
-// @arch:layer=infrastructure
-```
+### Storage
+Breadcrumbs are saved to `.arch-breadcrumbs.json` in the project root (a JSON array with id, text, category,
+author, timestamp, filePath, lineNumber and linkedBreadcrumbs). Line numbers are not adjusted automatically
+when the surrounding code moves.
 
 ### Navigating Breadcrumbs
 Use **Go To → Navigate Linked Breadcrumbs** to jump between related breadcrumbs. The Breadcrumbs tool window (bottom panel) shows all breadcrumbs with filtering and search.
@@ -90,8 +77,7 @@ Use **Go To → Navigate Linked Breadcrumbs** to jump between related breadcrumb
 
 ## 📋 Requirements
 
-- IntelliJ IDEA 2024.3+ (build 243+)
-- Java 21+
+- IntelliJ IDEA 2024.2+ (build 242+)
 
 ## 🏗️ Building from Source
 

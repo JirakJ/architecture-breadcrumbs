@@ -7,6 +7,7 @@ import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.jakubjirak.archbreadcrumbs.model.Breadcrumb
 import com.jakubjirak.archbreadcrumbs.settings.BreadcrumbsSettings
+import com.jakubjirak.archbreadcrumbs.store.BreadcrumbQueries
 import com.jakubjirak.archbreadcrumbs.store.BreadcrumbStore
 
 class NavigateBreadcrumbAction : AnAction() {
@@ -20,9 +21,7 @@ class NavigateBreadcrumbAction : AnAction() {
 
         val store = BreadcrumbStore.getInstance(project)
         val basePath = project.basePath ?: return
-        val filePath = virtualFile.path.let {
-            if (it.startsWith(basePath)) it.removePrefix(basePath).removePrefix("/") else it
-        }
+        val filePath = BreadcrumbQueries.relativePath(basePath, virtualFile.path)
 
         val lineNumber = editor.document.getLineNumber(editor.caretModel.offset) + 1
         val currentBreadcrumb = store.getBreadcrumbsForFile(filePath).find { it.lineNumber == lineNumber }

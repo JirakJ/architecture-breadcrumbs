@@ -1,12 +1,10 @@
 package com.jakubjirak.archbreadcrumbs.store
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.vfs.LocalFileSystem
 import com.jakubjirak.archbreadcrumbs.model.Breadcrumb
 import com.jakubjirak.archbreadcrumbs.model.BreadcrumbCategory
 import java.io.File
@@ -18,7 +16,6 @@ class BreadcrumbStore(private val project: Project) : Disposable {
 
     private val breadcrumbs: MutableList<Breadcrumb> = CopyOnWriteArrayList()
     private val listeners: MutableList<BreadcrumbChangeListener> = CopyOnWriteArrayList()
-    private val gson: Gson = GsonBuilder().setPrettyPrinting().create()
 
     fun interface BreadcrumbChangeListener {
         fun onBreadcrumbsChanged()
@@ -39,11 +36,7 @@ class BreadcrumbStore(private val project: Project) : Disposable {
                 LOG.info("No breadcrumbs file found at ${file.absolutePath}")
                 return
             }
-            val json = file.readText()
-            if (json.isBlank()) return
-
-            val type = object : TypeToken<List<Breadcrumb>>() {}.type
-            val loaded: List<Breadcrumb> = gson.fromJson(json, type) ?: emptyList()
+            val loaded = BreadcrumbJson.decode(file.readText())
             breadcrumbs.clear()
             breadcrumbs.addAll(loaded)
             LOG.info("Loaded ${breadcrumbs.size} breadcrumbs from ${file.name}")
@@ -56,8 +49,9 @@ class BreadcrumbStore(private val project: Project) : Disposable {
     fun saveBreadcrumbs() {
         try {
             val file = getStoreFile()
-            val json = gson.toJson(breadcrumbs.toList())
-            file.writeText(json)
+            file.writeText(BreadcrumbJson.encode(breadcrumbs.toList()))
+            // Let the VFS (and VCS) see the change without waiting for the next refresh.
+            LocalFileSystem.getInstance().refreshIoFiles(listOf(file), true, false, null)
             LOG.info("Saved ${breadcrumbs.size} breadcrumbs to ${file.name}")
         } catch (e: Exception) {
             LOG.warn("Failed to save breadcrumbs", e)
@@ -102,13 +96,7 @@ class BreadcrumbStore(private val project: Project) : Disposable {
     fun getBreadcrumbCount(): Int = breadcrumbs.size
 
     fun searchBreadcrumbs(query: String): List<Breadcrumb> {
-        val lowerQuery = query.lowercase()
-        return breadcrumbs.filter {
-            it.text.lowercase().contains(lowerQuery) ||
-                it.author.lowercase().contains(lowerQuery) ||
-                it.filePath.lowercase().contains(lowerQuery) ||
-                it.category.displayName.lowercase().contains(lowerQuery)
-        }
+        return BreadcrumbQueries.search(breadcrumbs.toList(), query)
     }
 
     fun getLinkedBreadcrumbs(breadcrumb: Breadcrumb): List<Breadcrumb> {
